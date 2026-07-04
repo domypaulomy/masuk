@@ -9,7 +9,7 @@
 
   html, body {
     height: 100%;
-    background: #1a1a1a; /* fallback, senada sama warna gelap di gambar */
+    background: #ffffff; /* area di luar/belakang gambar jadi putih */
   }
 
   body {
@@ -52,28 +52,29 @@
     cursor: pointer;
   }
 
-  /* Input "Nomor ponsel atau email" */
-  #email {
+  /* Input "Nomor ponsel atau email" & "Kata sandi" */
+  #email, #password {
     top: 38.5%;
     left: 4.3%;
     width: 91.4%;
     height: 7%;
     padding-left: 5%;
-    color: #ffffff;       /* warna teks yang diketik user */
+    color: #ffffff;       /* warna teks yang diketik user, saat masih transparan */
     font-size: 16px;       /* min 16px penting biar gak auto-zoom di iOS */
     caret-color: #ffffff;
+    border-radius: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Input "Kata sandi" */
   #password {
     top: 48.4%;
-    left: 4.3%;
-    width: 91.4%;
-    height: 7%;
-    padding-left: 5%;
-    color: #ffffff;
-    font-size: 16px;
-    caret-color: #ffffff;
+  }
+
+  /* Kondisi setelah user mulai mengetik isi */
+  #email.filled, #password.filled {
+    background-color: #ffffff;
+    color: #1a1a1a;        /* teks jadi gelap biar kebaca di atas putih */
+    caret-color: #1a1a1a;
   }
 
   /* Tombol "Login" (bentuk pill abu-abu sudah ada di gambar) */
@@ -118,6 +119,17 @@
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
       alert('Login diproses (dummy, belum terhubung ke server).');
+    });
+
+    // Ubah background input jadi putih begitu ada isinya, balik transparan kalau dikosongkan
+    document.querySelectorAll('#email, #password').forEach(function (input) {
+      input.addEventListener('input', function () {
+        if (input.value.length > 0) {
+          input.classList.add('filled');
+        } else {
+          input.classList.remove('filled');
+        }
+      });
     });
   </script>
 
