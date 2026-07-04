@@ -9,7 +9,7 @@
 
   html, body {
     height: 100%;
-    background: #ffffff; /* area di luar/belakang gambar jadi putih */
+    background: #ffffff; /* area di luar/belakang gambar */
   }
 
   body {
@@ -19,10 +19,9 @@
   }
 
   /*
-    KUNCI UTAMANYA DI SINI:
-    - Aspect ratio dikunci PERSIS sama kaya gambar aslinya (465 x 939)
-    - Jadi di layar HP berapapun ukurannya, proporsi gambar & posisi form
-      tetap presisi, nggak akan geser/melenceng.
+    Aspect ratio dikunci PERSIS sama kaya gambar aslinya (465 x 939)
+    Jadi di layar HP berapapun ukurannya, proporsi gambar & posisi form
+    tetap presisi, nggak akan geser/melenceng.
   */
   .phone-frame {
     position: relative;
@@ -33,7 +32,6 @@
     background-position: center;
   }
 
-  /* Semua elemen form diposisikan pakai persen (%), relatif ke .phone-frame */
   .overlay-el {
     position: absolute;
     background: transparent;
@@ -54,26 +52,24 @@
 
   /* Input "Nomor ponsel atau email" & "Kata sandi" */
   #email, #password {
-    top: 38.5%;
     left: 4.3%;
     width: 91.4%;
     height: 7%;
     padding-left: 5%;
-    color: #ffffff;       /* warna teks yang diketik user, saat masih transparan */
+    color: #ffffff;
     font-size: 16px;       /* min 16px penting biar gak auto-zoom di iOS */
     caret-color: #ffffff;
     border-radius: 14px;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  #password {
-    top: 48.4%;
-  }
+  #email    { top: 38.5%; }
+  #password { top: 48.4%; }
 
-  /* Kondisi setelah user mulai mengetik isi */
+  /* Kondisi setelah user mulai mengetik isi -> background jadi putih */
   #email.filled, #password.filled {
     background-color: #ffffff;
-    color: #1a1a1a;        /* teks jadi gelap biar kebaca di atas putih */
+    color: #1a1a1a;
     caret-color: #1a1a1a;
   }
 
@@ -84,7 +80,6 @@
     width: 91.4%;
     height: 5%;
     cursor: pointer;
-    /* teks disembunyikan karena tulisan "Login" udah ada di gambar */
     font-size: 0;
     color: transparent;
   }
@@ -121,7 +116,6 @@
       alert('Login diproses (dummy, belum terhubung ke server).');
     });
 
-    // Ubah background input jadi putih begitu ada isinya, balik transparan kalau dikosongkan
     document.querySelectorAll('#email, #password').forEach(function (input) {
       input.addEventListener('input', function () {
         if (input.value.length > 0) {
